@@ -78,7 +78,7 @@ const Card = () => {
         return (
             <div className="weather">
 
-                <img src={`./src/assets/${getWeatherIcon(weather[0].main)}.png`} className="weather-icon" alt=""></img>
+                <img src={`/assets/${getWeatherIcon(weather[0].main)}.png`} className="weather-icon" alt=""></img>
                
                 <h1 className="temp">{Math.round(main.temp)}°C</h1>
 
@@ -86,14 +86,14 @@ const Card = () => {
 
                 <div className="details">
                     <div className="col">
-                        <img src="./src/assets/humidity.png" alt=""></img>
+                        <img src="/assets/humidity.png" alt=""></img>
                         <div>
                             <p className="humidity">{main.humidity}%</p>
                             <p>Humidity</p>
                         </div>
                     </div>
                     <div className="col">
-                        <img src="./src/assets/wind.png" alt=""></img>
+                        <img src="/assets/wind.png" alt=""></img>
                         <div>
                             <p className="wind">{wind.speed} km/h</p>
                             <p>Wind Speed</p>
@@ -132,7 +132,7 @@ const Card = () => {
                         value={city}
                         spellCheck="false"
                     ></input>
-                    <button onClick={checkWeather}><img src="./src/assets/search.png" alt=""></img></button>
+                    <button onClick={checkWeather}><img src="/assets/search.png" alt=""></img></button>
                 </div>
 
                 {renderWeather()}
