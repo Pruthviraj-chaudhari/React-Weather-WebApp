@@ -36,11 +36,15 @@ const Card = () => {
         try {
             const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
             const data = await response.json();
-
+    
             if (response.status === 404) {
                 setError(true);
                 setWeatherData(null);
+                setTimeout(() => {
+                    setError(false);
+                }, 10000);
             } else {
+                console.log("Weather data received:", data);
                 setWeatherData(data);
                 updateGradientColor(data.weather[0].main);
                 setError(false);
@@ -52,13 +56,20 @@ const Card = () => {
         }
     };
 
-
     const renderWeather = () => {
-        if (error) {
-            return <div className="error"><p>Invalid City Name</p></div>;
+        console.log("Rendering weather. Error:", error, "Weather data:", weatherData);
+
+        if (error == true) {
+            console.log("Rendering error message");
+            return (
+                <div className="error">
+                    <p>Invalid City Name</p>
+                </div>
+            );
         }
 
         if (!weatherData) {
+            console.log("No weather data");
             return null;
         }
 
@@ -75,14 +86,14 @@ const Card = () => {
 
                 <div className="details">
                     <div className="col">
-                        <img src="images/humidity.png" alt=""></img>
+                        <img src="./src/assets/humidity.png" alt=""></img>
                         <div>
                             <p className="humidity">{main.humidity}%</p>
                             <p>Humidity</p>
                         </div>
                     </div>
                     <div className="col">
-                        <img src="images/wind.png" alt=""></img>
+                        <img src="./src/assets/wind.png" alt=""></img>
                         <div>
                             <p className="wind">{wind.speed} km/h</p>
                             <p>Wind Speed</p>
@@ -110,6 +121,7 @@ const Card = () => {
     return (
         <div>
             <div className="card" style={{ background: gradientColor }}>
+            
                 <div className="search">
                     <input
                         type="text"
@@ -122,7 +134,9 @@ const Card = () => {
                     ></input>
                     <button onClick={checkWeather}><img src="./src/assets/search.png" alt=""></img></button>
                 </div>
+
                 {renderWeather()}
+
             </div>
         </div>
     );
